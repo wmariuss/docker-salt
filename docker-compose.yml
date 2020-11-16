@@ -1,0 +1,71 @@
+version: "3.8"
+services:
+  master:
+    build:
+      context: master
+    container_name: salt-master
+    privileged: true
+    environment:
+      LOG_LEVEL: info
+    hostname: master
+    entrypoint: /sbin/init
+    networks:
+      - saltnet
+    expose:
+      - "4505"
+      - "4506"
+    volumes:
+      - ./srv/salt:/srv/salt:rw
+      - ./etc/salt/master.d:/etc/salt/master.d:rw
+      - ./etc/salt/minion.d:/etc/salt/minion.d:rw
+
+  ubuntu-18-04:
+    build:
+      context: minion-ubuntu-18.04
+    container_name: salt-minion-ubuntu-18-04
+    privileged: true
+    links:
+      - master
+    environment:
+      LOG_LEVEL: info
+    hostname: ubuntu-18-04
+    entrypoint: /sbin/init
+    networks:
+      - saltnet
+    volumes:
+      - ./etc/salt/minion.d:/etc/salt/minion.d:rw
+
+  centos-7:
+    build:
+      context: minion-centos-7
+    container_name: salt-minion-centos-7
+    privileged: true
+    links:
+      - master
+    environment:
+      LOG_LEVEL: info
+    hostname: centos-7
+    entrypoint: /usr/sbin/init
+    networks:
+      - saltnet
+    volumes:
+      - ./etc/salt/minion.d:/etc/salt/minion.d:rw
+
+  centos-8:
+    build:
+      context: minion-centos-8
+    container_name: salt-minion-centos-8
+    privileged: true
+    links:
+      - master
+    environment:
+      LOG_LEVEL: info
+    hostname: centos-8
+    entrypoint: /usr/sbin/init
+    networks:
+      - saltnet
+    volumes:
+      - ./etc/salt/minion.d:/etc/salt/minion.d:rw
+
+networks:
+  saltnet:

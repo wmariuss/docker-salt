@@ -1,0 +1,6 @@
+# OS
+*.DS_Store
+
+# General
+*.log
+.vscode
