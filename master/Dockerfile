@@ -22,8 +22,6 @@ RUN apt-get update \
     && sed -i -e 's/#default_include.*/default_include: master.d\/\*.conf/' /etc/salt/master \
     && sed -i -e 's/#user.*/user: root/' /etc/salt/master \
     && sed -i -e 's/#hash_type.*/hash_type: sha256/' /etc/salt/master \
-    && echo "auto_accept: True" > /etc/salt/master.d/auto_sign.conf \
-    && echo "interface: 0.0.0.0\n\nfile_roots:\n  base:\n    - /srv/salt/state\n\npillar_roots:\n  base:\n    - /srv/salt/pillar\n" > /etc/salt/master.d/backends.conf \
     # Fix getty consume 100% CPU
     && systemctl disable getty@tty1.service \
     # Fix systemd

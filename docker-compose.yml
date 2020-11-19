@@ -16,6 +16,8 @@ services:
       - "4506"
     volumes:
       - ./srv/salt:/srv/salt:rw
+      # - ~/work/core/optastack:/srv/salt:rw
+      # - ~/work/core/optastack/pillar.examples:/srv/pillar:rw
       - ./etc/salt/master.d:/etc/salt/master.d:rw
       - ./etc/salt/minion.d:/etc/salt/minion.d:rw
 
