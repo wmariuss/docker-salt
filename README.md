@@ -10,3 +10,4 @@ Create `salt` environments using docker.
 ## Authors
 
 * [Marius Stanca](mailto:me@marius.xyz)
+
